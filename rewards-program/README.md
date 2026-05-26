@@ -187,10 +187,5 @@ All errors return a structured JSON response.
 
 # Author
 
-Backend Rewards Program Implementation using:
+Bhushan Shimpi
 
-- Spring Boot
-- Spring Data JPA
-- H2 Database
-- Maven
-- JUnit 5
