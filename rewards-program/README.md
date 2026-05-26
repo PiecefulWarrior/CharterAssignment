@@ -110,9 +110,7 @@ VALUES (3, 500.00, CURRENT_DATE);
 
 ---
 
-# Build & Run
-
-## Build Project
+## Build & Run
 
 ```bash
 mvn clean package
