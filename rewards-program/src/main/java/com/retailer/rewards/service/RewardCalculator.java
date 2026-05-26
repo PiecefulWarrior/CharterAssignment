@@ -1,7 +1,6 @@
 package com.retailer.rewards.service;
 
 import com.retailer.rewards.exception.InvalidTransactionException;
-import com.retailer.rewards.model.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -9,7 +8,6 @@ import java.math.BigDecimal;
 /**
  * Encapsulates the business rule for converting a single transaction
  * amount into reward points.
- * <p>
  * Rule:
  * <ul>
  *   <li>2 points for every whole dollar spent over $100.</li>
@@ -22,9 +20,6 @@ import java.math.BigDecimal;
 @Service
 public class RewardCalculator {
 
-    private static final BigDecimal TIER_ONE_THRESHOLD = new BigDecimal("50");
-    private static final BigDecimal TIER_TWO_THRESHOLD = new BigDecimal("100");
-
     /**
      * Calculates reward points for a single transaction.
      *
@@ -33,29 +28,20 @@ public class RewardCalculator {
      * @throws InvalidTransactionException if the transaction or its amount is null,
      *                                     or the amount is negative
      */
-    public long calculate(Transaction transaction) {
-        if (transaction == null) {
-            throw new InvalidTransactionException("Transaction must not be null");
-        }
-        BigDecimal amount = transaction.getAmount();
-        if (amount == null) {
-            throw new InvalidTransactionException(
-                    "Amount must not be null for transaction " + transaction.getTransactionId());
-        }
-        if (amount.signum() < 0) {
-            throw new InvalidTransactionException(
-                    "Amount must not be negative for transaction " + transaction.getTransactionId());
-        }
+    public int calculate(BigDecimal amount) {
 
+        BigDecimal leastAmount = BigDecimal.valueOf(50);
+        if (amount == null || amount.compareTo(leastAmount) <= 0) {
+            return 0;
+        }
         // Only the integer dollar portion is counted, per the example in the spec.
-        long dollars = amount.toBigInteger().longValueExact();
-
-        long points = 0L;
-        if (dollars > 100L) {
-            points += 2L * (dollars - 100L);
-            points += 50L; // full tier-one band ($50 to $100)
-        } else if (dollars > 50L) {
-            points += (dollars - 50L);
+        int dollars = amount.toBigInteger().intValue();
+        int points = 0;
+        if (dollars > 100) {
+            points += 2 * (dollars - 100);
+            points += 50; // full tier-one band ($50 to $100)
+        } else if (dollars > 50) {
+            points += (dollars - 50);
         }
         return points;
     }

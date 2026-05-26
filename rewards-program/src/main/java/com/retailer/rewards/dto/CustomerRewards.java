@@ -1,4 +1,4 @@
-package com.retailer.rewards.model;
+package com.retailer.rewards.dto;
 
 import java.time.Month;
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public record CustomerRewards(
         Long customerId,
-        Map<Month, Long> monthlyPoints,
+        Map<String, Integer> monthlyPoints,
         long totalPoints
 ) {
 }
