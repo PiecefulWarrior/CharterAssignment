@@ -51,14 +51,6 @@ rewards-program/
             └── RewardsControllerIntegrationTest.java   # MockMvc integration tests
 ```
 
-## Implementation Notes
-
-- **Months are never hardcoded.** The set of months in any response is derived dynamically from each transaction's date using `LocalDate#getMonth()`.
-- **Date range is configurable** via `start` and `end` query parameters. If omitted, the endpoint defaults to the last three calendar months ending today.
-- **`BigDecimal`** is used for monetary amounts to avoid binary floating-point errors. Only the whole-dollar portion contributes to points, per the canonical example.
-- **Validation** is enforced via Bean Validation annotations on the `Transaction` model and explicit checks in the service layer.
-- **Exception handling** is centralized in `GlobalExceptionHandler`, producing structured JSON error bodies with timestamp, status, and message.
-
 ## Build & Run
 
 ```bash
