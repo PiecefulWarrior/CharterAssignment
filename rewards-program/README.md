@@ -57,14 +57,6 @@ The application uses an H2 in-memory database.
 http://localhost:8080/h2-console
 ```
 
-## JDBC URL
-
-```text
-jdbc:h2:mem:rewardsdb
-```
-
----
-
 # Sample Data
 
 File:
@@ -109,18 +101,6 @@ VALUES (3, 500.00, CURRENT_DATE);
 ```
 
 ---
-
-## Build & Run
-
-```bash
-mvn clean package
-```
-
-## Run Tests
-
-```bash
-mvn test
-```
 
 ## Start Application
 
@@ -185,7 +165,35 @@ All errors return a structured JSON response.
 
 ---
 
+# Test Coverage
+
+The project includes:
+
+- Service layer unit tests
+- Controller integration tests
+- Validation testing
+- Exception handling testing
+- H2 database integration testing
+
+---
+
+# Future Improvements
+
+Possible production-grade enhancements:
+
+- PostgreSQL/MySQL integration
+- Flyway database migrations
+- Docker support
+- Swagger/OpenAPI documentation
+- Authentication & authorization
+- Redis caching
+- Kafka event publishing
+- Pagination and filtering
+- Distributed tracing and monitoring
+- Testcontainers integration
+
+---
+
 # Author
 
 Bhushan Shimpi
-
